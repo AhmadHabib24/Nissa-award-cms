@@ -63,7 +63,13 @@ class NomineeResource extends Resource
                     ->directory('nominees'),
                 Forms\Components\Textarea::make('social_links')
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('status')
+                Forms\Components\Select::make('status')
+                    ->options([
+                        'pending' => 'Pending',
+                        'approved' => 'Approved',
+                        'rejected' => 'Rejected',
+                    ])
+                    ->default('pending')
                     ->required(),
                 Forms\Components\Toggle::make('consent_to_publish')
                     ->required(),
