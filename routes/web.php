@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $categories = \App\Models\Category::all();
-    $featuredNominees = \App\Models\Nominee::with('category')->where('status', 'approved')->inRandomOrder()->take(4)->get();
+    $featuredNominees = \App\Models\Nominee::with('category')->withCount('votes')->where('status', 'approved')->inRandomOrder()->get();
     $teamMembers = \App\Models\TeamMember::where('is_active', true)->orderBy('sort_order')->get();
     $pastWinners = \App\Models\PastWinner::where('is_active', true)->latest()->take(8)->get();
     $partners = \App\Models\Partner::where('is_active', true)->orderBy('sort_order')->get();

@@ -85,6 +85,9 @@
                     <div class="mb-4">
                         <input type="email" name="voter_email" required placeholder="Enter your email address" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-nissa-magenta focus:border-nissa-magenta outline-none transition">
                     </div>
+                    <div class="mb-4">
+                        <input type="tel" name="voter_phone" required placeholder="Enter your phone number" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-nissa-magenta focus:border-nissa-magenta outline-none transition">
+                    </div>
                     <button type="submit" class="w-full text-white bg-nissa-magenta hover:bg-nissa-pink font-bold rounded-xl text-lg px-5 py-3 text-center transition shadow-md">
                         Submit Vote
                     </button>

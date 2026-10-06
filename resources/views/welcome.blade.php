@@ -14,9 +14,7 @@
 
 <x-core-team :teamMembers="$teamMembers" />
 
-<x-award-categories :categories="$categories" />
-
-<x-featured-nominees :nominees="$featuredNominees" />
+<x-featured-nominees :nominees="$featuredNominees" :categories="$categories" />
 
 <x-hall-of-fame :pastWinners="$pastWinners" />
 

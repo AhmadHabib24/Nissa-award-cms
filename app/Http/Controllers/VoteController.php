@@ -28,6 +28,7 @@ class VoteController extends Controller
 
         $request->validate([
             'voter_email' => 'required|email',
+            'voter_phone' => 'required|string|max:20',
         ]);
 
         $existingVote = Vote::where('voter_email', $request->voter_email)
@@ -44,6 +45,7 @@ class VoteController extends Controller
         $vote->category_id = $nominee->category_id;
         $vote->edition_id = $nominee->edition_id;
         $vote->voter_email = $request->voter_email;
+        $vote->voter_phone = $request->voter_phone;
         $vote->ip_address = $request->ip();
         $vote->save();
 
