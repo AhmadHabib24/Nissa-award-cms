@@ -24,7 +24,11 @@ class PastWinnerResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')->required()->maxLength(255)->label('Brand/Winner Name'),
-                Forms\Components\TextInput::make('category_name')->required()->maxLength(255)->label('Category Won'),
+                Forms\Components\Select::make('category_name')
+                    ->label('Category Won')
+                    ->options(\App\Models\Category::pluck('name', 'name'))
+                    ->searchable()
+                    ->required(),
                 Forms\Components\TextInput::make('edition_name')->required()->maxLength(255)->label('Edition (e.g., Nissa Awards 2025)'),
                 Forms\Components\FileUpload::make('image')->image()->directory('past-winners'),
                 Forms\Components\Toggle::make('is_active')->default(true),

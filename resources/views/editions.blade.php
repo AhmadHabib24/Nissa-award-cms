@@ -40,7 +40,9 @@
                             <h2 class="text-4xl md:text-5xl font-black text-nissa-dark tracking-tight">Nissa Awards {{ $edition->year }}</h2>
                             <span class="px-6 py-2 bg-nissa-sage text-white text-sm font-bold rounded-full shadow-md">Completed</span>
                         </div>
-                        <p class="text-lg text-gray-600 mb-12 max-w-3xl">The {{ $edition->year }} edition was a spectacular celebration honoring the phenomenal women who shaped industries and broke barriers throughout the year.</p>
+                        <p class="text-lg text-gray-600 mb-12 max-w-3xl">
+                            {{ $edition->description ?? "The {$edition->year} edition was a spectacular celebration honoring the phenomenal women who shaped industries and broke barriers throughout the year." }}
+                        </p>
 
                         <!-- Winners of this edition -->
                         @php

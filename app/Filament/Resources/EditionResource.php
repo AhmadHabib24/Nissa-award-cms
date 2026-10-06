@@ -26,6 +26,10 @@ class EditionResource extends Resource
                 Forms\Components\TextInput::make('year')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\Textarea::make('description')
+                    ->label('Edition Description (Theory Content)')
+                    ->rows(4)
+                    ->columnSpanFull(),
                 Forms\Components\DatePicker::make('date'),
                 Forms\Components\TextInput::make('venue')
                     ->maxLength(255)

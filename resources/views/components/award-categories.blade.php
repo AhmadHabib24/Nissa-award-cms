@@ -17,15 +17,15 @@
         <div class="flex flex-wrap justify-center gap-6 md:gap-8">
             @if($categories->count() > 0)
                 @foreach($categories as $category)
-                <div class="relative group cursor-pointer w-full md:w-[calc(50%-1rem)] lg:w-[calc(50%-1.5rem)]">
+                <a href="{{ route('vote.show', $category->id) }}" class="relative group cursor-pointer w-full md:w-[calc(50%-1rem)] lg:w-[calc(50%-1.5rem)] block">
                     <div class="absolute inset-0 bg-nissa-dark translate-x-2 translate-y-2 transition-transform duration-300 group-hover:translate-x-3 group-hover:translate-y-3"></div>
-                    <div class="relative {{ $loop->iteration % 2 == 0 ? 'bg-nissa-pink' : 'bg-nissa-magenta' }} text-white py-8 px-4 border border-nissa-dark flex flex-col items-center justify-center transition-transform duration-300 group-hover:-translate-x-1 group-hover:-translate-y-1">
+                    <div class="relative {{ $loop->iteration % 2 == 0 ? 'bg-nissa-pink' : 'bg-nissa-magenta' }} text-white py-8 px-4 border border-nissa-dark flex flex-col items-center justify-center transition-transform duration-300 group-hover:-translate-x-1 group-hover:-translate-y-1 h-full">
                         <h3 class="font-bold text-lg md:text-xl tracking-wider uppercase text-center">{{ $category->name }}</h3>
                         @if($category->description)
                             <p class="text-sm mt-2 text-white/80 line-clamp-2 text-center max-w-sm">{{ Str::limit($category->description, 60) }}</p>
                         @endif
                     </div>
-                </div>
+                </a>
                 @endforeach
             @else
                 <!-- Category Block 1 -->
