@@ -58,9 +58,9 @@ class NomineeResource extends Resource
                     ->columnSpanFull(),
                 Forms\Components\Textarea::make('evidence_links')
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('profile_photo')
-                    ->maxLength(255)
-                    ->default(null),
+                Forms\Components\FileUpload::make('profile_photo')
+                    ->image()
+                    ->directory('nominees'),
                 Forms\Components\Textarea::make('social_links')
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('status')
@@ -94,8 +94,7 @@ class NomineeResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('phone')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('profile_photo')
-                    ->searchable(),
+                Tables\Columns\ImageColumn::make('profile_photo'),
                 Tables\Columns\TextColumn::make('status'),
                 Tables\Columns\IconColumn::make('consent_to_publish')
                     ->boolean(),
