@@ -197,22 +197,7 @@
 
                 <!-- Column 3 & 4: Gallery & Information -->
                 <div class="col-span-1 md:col-span-2 flex flex-col md:flex-row gap-8 md:gap-12">
-                    <div class="flex-1">
-                        <h3 class="text-xl font-bold mb-6 border-b-2 border-nissa-magenta inline-block pb-2">Gallery</h3>
-                        <div class="grid grid-cols-2 gap-2">
-                            @php
-                                $footerGallery = \App\Models\GalleryImage::where('is_active', true)->latest()->take(4)->get();
-                            @endphp
-                            @forelse($footerGallery as $image)
-                                <img src="{{ Storage::url($image->image_path) }}" alt="{{ $image->title }}" class="w-full h-20 object-cover rounded-md opacity-80 hover:opacity-100 transition cursor-pointer">
-                            @empty
-                                <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&q=80&w=300" class="w-full h-20 object-cover rounded-md opacity-80 hover:opacity-100 transition cursor-pointer">
-                                <img src="https://images.unsplash.com/photo-1541845157-a6d2d100c931?auto=format&fit=crop&q=80&w=300" class="w-full h-20 object-cover rounded-md opacity-80 hover:opacity-100 transition cursor-pointer">
-                                <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&q=80&w=300" class="w-full h-20 object-cover rounded-md opacity-80 hover:opacity-100 transition cursor-pointer">
-                                <img src="https://images.unsplash.com/photo-1533604101037-dc3bbdc9c8c4?auto=format&fit=crop&q=80&w=300" class="w-full h-20 object-cover rounded-md opacity-80 hover:opacity-100 transition cursor-pointer">
-                            @endforelse
-                        </div>
-                    </div>
+                    
                     
                     <div class="flex-1">
                         <h3 class="text-xl font-bold mb-6 border-b-2 border-nissa-magenta inline-block pb-2">Information</h3>

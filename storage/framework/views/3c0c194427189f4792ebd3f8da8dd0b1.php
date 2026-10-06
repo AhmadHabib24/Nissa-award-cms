@@ -1,0 +1,1 @@
+<?php echo $__env->make("admin.bottom-nav", \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/u515053719/domains/nissaawards.com/public_html/storage/framework/views/1f8ff3836122caa1366161e1fbce72f4.blade.php ENDPATH**/ ?>
