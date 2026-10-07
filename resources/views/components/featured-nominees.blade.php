@@ -50,7 +50,7 @@
             @if($nominees->count() > 0)
                 @foreach($nominees as $nominee)
                 <div x-show="selectedCategory === 'all' || selectedCategory === '{{ $nominee->category_id }}'" class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition flex flex-col">
-                    <img src="{{ $nominee->profile_photo ? Storage::url($nominee->profile_photo) : 'https://ui-avatars.com/api/?name='.urlencode($nominee->name).'&background=f3f4f6&color=9D2254' }}" alt="{{ $nominee->name }}" class="w-full h-64 object-cover" />
+                    <img src="{{ $nominee->profile_photo ? Storage::url($nominee->profile_photo) : 'https://ui-avatars.com/api/?name='.urlencode($nominee->name).'&background=f3f4f6&color=9D2254' }}" alt="{{ $nominee->name }}" class="w-full h-64 object-cover object-top" />
                     <div class="p-6 flex flex-col flex-grow">
                         <h3 class="font-bold text-lg">{{ $nominee->name }}</h3>
                         <p class="text-nissa-sage text-sm font-medium mb-4">{{ $nominee->category->name ?? 'Nominee' }}</p>

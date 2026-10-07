@@ -32,7 +32,7 @@
                 @foreach($partners as $partner)
                     <a href="{{ $partner->link ?? '#' }}" target="_blank" rel="noopener noreferrer" class="group block p-8 rounded-2xl bg-nissa-light border border-gray-100 hover:shadow-xl transition duration-300 flex flex-col items-center justify-center">
                         @if($partner->logo)
-                            <img src="{{ Storage::url($partner->logo) }}" alt="{{ $partner->name }}" class="max-h-20 max-w-full object-contain filter grayscale group-hover:grayscale-0 transition duration-500">
+                            <img src="{{ Storage::url($partner->logo) }}" alt="{{ $partner->name }}" class="h-24 md:h-32 w-auto max-w-full object-contain filter grayscale group-hover:grayscale-0 transition duration-500">
                         @else
                             <div class="w-20 h-20 bg-nissa-magenta/10 rounded-full flex items-center justify-center text-nissa-magenta font-bold text-2xl mb-4 group-hover:bg-nissa-magenta group-hover:text-white transition duration-300">
                                 {{ substr($partner->name, 0, 1) }}
