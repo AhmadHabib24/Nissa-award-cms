@@ -212,11 +212,11 @@
                             </div>
                             <div class="flex items-start space-x-3">
                                 <i class="fa-solid fa-location-dot text-nissa-magenta mt-1"></i>
-                                <span>Event Venue: {!! isset($currentEdition) && $currentEdition->venue ? nl2br(e($currentEdition->venue)) : 'To be announced' !!}</span>
+                                <span>Event Venue: {{ $settings['Event Venue'] ?? (isset($currentEdition) && $currentEdition->venue ? $currentEdition->venue : 'To be announced') }}</span>
                             </div>
                             <div class="flex items-start space-x-3">
                                 <i class="fa-solid fa-calendar text-nissa-magenta mt-1"></i>
-                                <span>Event Date: {{ isset($currentEdition) && $currentEdition->date ? \Carbon\Carbon::parse($currentEdition->date)->format('jS F Y') : 'To be announced' }}</span>
+                                <span>Event Date: {{ $settings['Date'] ?? (isset($currentEdition) && $currentEdition->date ? \Carbon\Carbon::parse($currentEdition->date)->format('jS F Y') : 'To be announced') }}</span>
                             </div>
                         </div>
                     </div>
