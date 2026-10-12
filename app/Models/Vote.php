@@ -20,4 +20,9 @@ class Vote extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function edition()
+    {
+        return $this->belongsTo(Edition::class);
+    }
 }

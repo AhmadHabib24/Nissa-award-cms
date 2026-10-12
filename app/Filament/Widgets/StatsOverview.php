@@ -14,22 +14,32 @@ class StatsOverview extends BaseWidget
 
     protected function getStats(): array
     {
+        $totalNominees = Nominee::count();
+        $totalVotes = Vote::count();
+        $validVotes = Vote::where('status', 'valid')->count();
+
+        // Get current leading nominee
+        $topNominee = Nominee::withCount('votes')
+            ->orderByDesc('votes_count')
+            ->first();
+
         return [
-            Stat::make('Total Nominees', Nominee::count())
-                ->description('Total registered nominees')
+            Stat::make('Total Nominees', $totalNominees)
+                ->description('Registered nominees across categories')
                 ->descriptionIcon('heroicon-m-users')
-                ->color('success')
-                ->chart([7, 2, 10, 3, 15, 4, 17]),
-            Stat::make('Total Votes', Vote::count())
-                ->description('Votes across all categories')
+                ->color('info'),
+            Stat::make('Total Votes', $totalVotes)
+                ->description("{$validVotes} valid votes recorded")
                 ->descriptionIcon('heroicon-m-check-badge')
-                ->color('primary')
-                ->chart([10, 20, 5, 30, 45, 20, 60]),
-            Stat::make('Sponsorships', SponsorInquiry::count())
+                ->color('primary'),
+            Stat::make('Current Vote Leader', $topNominee ? "{$topNominee->name} ({$topNominee->votes_count} votes)" : 'None')
+                ->description($topNominee && $topNominee->category ? $topNominee->category->name : 'No leader yet')
+                ->descriptionIcon('heroicon-m-trophy')
+                ->color('success'),
+            Stat::make('Sponsorship Inquiries', SponsorInquiry::count())
                 ->description('Inquiries received')
                 ->descriptionIcon('heroicon-m-banknotes')
-                ->color('warning')
-                ->chart([1, 2, 0, 1, 3, 2, 4]),
+                ->color('warning'),
         ];
     }
 }

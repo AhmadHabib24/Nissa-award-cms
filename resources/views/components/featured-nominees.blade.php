@@ -83,10 +83,13 @@
                     <i class="fa-solid fa-envelope-open-text"></i>
                 </div>
                 <h3 class="mb-2 text-2xl font-bold text-nissa-dark">Verify Your Vote</h3>
-                <p class="text-gray-500 text-sm mb-6">You are voting for <strong class="text-nissa-magenta" x-text="selectedNomineeName"></strong>. Please enter your email and phone number to confirm.</p>
+                <p class="text-gray-500 text-sm mb-6">You are voting for <strong class="text-nissa-magenta" x-text="selectedNomineeName"></strong>. Please enter your name, email, and phone number to confirm.</p>
                 
                 <form :action="'/vote/' + selectedNomineeId" method="POST">
                     @csrf
+                    <div class="mb-4">
+                        <input type="text" name="voter_name" required placeholder="Enter your full name" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-nissa-magenta focus:border-nissa-magenta outline-none transition">
+                    </div>
                     <div class="mb-4">
                         <input type="email" name="voter_email" required placeholder="Enter your email address" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-nissa-magenta focus:border-nissa-magenta outline-none transition">
                     </div>

@@ -23,24 +23,41 @@ class VoteResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nominee_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('category_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('edition_id')
-                    ->required()
-                    ->numeric(),
+                Forms\Components\Select::make('nominee_id')
+                    ->relationship('nominee', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->required(),
+                Forms\Components\Select::make('category_id')
+                    ->relationship('category', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->required(),
+                Forms\Components\Select::make('edition_id')
+                    ->relationship('edition', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->required(),
+                Forms\Components\TextInput::make('voter_name')
+                    ->maxLength(255),
                 Forms\Components\TextInput::make('voter_email')
                     ->email()
                     ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('voter_phone')
+                    ->tel()
                     ->maxLength(255),
                 Forms\Components\DateTimePicker::make('verified_at'),
                 Forms\Components\TextInput::make('ip_address')
                     ->maxLength(255)
                     ->default(null),
-                Forms\Components\TextInput::make('status')
+                Forms\Components\Select::make('status')
+                    ->options([
+                        'valid' => 'Valid',
+                        'suspicious' => 'Suspicious',
+                        'rejected' => 'Rejected',
+                    ])
+                    ->default('valid')
                     ->required(),
                 Forms\Components\TextInput::make('reason')
                     ->maxLength(255)
@@ -52,36 +69,60 @@ class VoteResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nominee_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('nominee.name')
+                    ->label('Nominee')
+                    ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('category_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('category.name')
+                    ->label('Category')
+                    ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('edition_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('edition.name')
+                    ->label('Edition')
                     ->sortable(),
+                Tables\Columns\TextColumn::make('voter_name')
+                    ->label('Voter Name')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('voter_email')
+                    ->label('Voter Email')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('voter_phone')
+                    ->label('Voter Phone')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->colors([
+                        'success' => 'valid',
+                        'warning' => 'suspicious',
+                        'danger' => 'rejected',
+                    ]),
+                Tables\Columns\TextColumn::make('ip_address')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('verified_at')
                     ->dateTime()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('ip_address')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('status'),
-                Tables\Columns\TextColumn::make('reason')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Voted At')
+                    ->dateTime()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('edition')
+                    ->relationship('edition', 'name'),
+                Tables\Filters\SelectFilter::make('category')
+                    ->relationship('category', 'name'),
+                Tables\Filters\SelectFilter::make('status')
+                    ->options([
+                        'valid' => 'Valid',
+                        'suspicious' => 'Suspicious',
+                        'rejected' => 'Rejected',
+                    ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

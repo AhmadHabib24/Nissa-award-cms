@@ -27,6 +27,7 @@ class VoteController extends Controller
         $nominee = Nominee::findOrFail($id);
 
         $request->validate([
+            'voter_name' => 'required|string|max:255',
             'voter_email' => 'required|email',
             'voter_phone' => 'required|string|max:20',
         ]);
@@ -44,6 +45,7 @@ class VoteController extends Controller
         $vote->nominee_id = $nominee->id;
         $vote->category_id = $nominee->category_id;
         $vote->edition_id = $nominee->edition_id;
+        $vote->voter_name = $request->voter_name;
         $vote->voter_email = $request->voter_email;
         $vote->voter_phone = $request->voter_phone;
         $vote->ip_address = $request->ip();

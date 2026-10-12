@@ -80,41 +80,68 @@ class NomineeResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('edition_id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('category_id')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\ImageColumn::make('profile_photo')
+                    ->circular(),
                 Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('slug')
+                    ->label('Nominee Name')
+                    ->searchable()
+                    ->sortable()
+                    ->weight('bold'),
+                Tables\Columns\TextColumn::make('category.name')
+                    ->label('Category')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('edition.name')
+                    ->label('Edition')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('votes_count')
+                    ->counts('votes')
+                    ->label('Total Votes')
+                    ->sortable()
+                    ->badge()
+                    ->color('primary'),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->colors([
+                        'warning' => 'pending',
+                        'success' => 'approved',
+                        'danger' => 'rejected',
+                    ]),
+                Tables\Columns\TextColumn::make('profession')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('city')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('profession')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('organization')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('phone')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
-                Tables\Columns\ImageColumn::make('profile_photo'),
-                Tables\Columns\TextColumn::make('status'),
                 Tables\Columns\IconColumn::make('consent_to_publish')
-                    ->boolean(),
+                    ->boolean()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->defaultSort('votes_count', 'desc')
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('edition')
+                    ->relationship('edition', 'name'),
+                Tables\Filters\SelectFilter::make('category')
+                    ->relationship('category', 'name'),
+                Tables\Filters\SelectFilter::make('status')
+                    ->options([
+                        'pending' => 'Pending',
+                        'approved' => 'Approved',
+                        'rejected' => 'Rejected',
+                    ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
