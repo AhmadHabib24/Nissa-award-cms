@@ -316,13 +316,8 @@
 
     <!-- Floating WhatsApp Chat Widget -->
     @php
+        // Dedicated WhatsApp number: 0330 7951212 -> 923307951212
         $whatsappNumber = '923307951212';
-        if (!empty($settings['phone'])) {
-            $cleanedPhone = preg_replace('/[^0-9]/', '', $settings['phone']);
-            if (strlen($cleanedPhone) >= 10) {
-                $whatsappNumber = $cleanedPhone;
-            }
-        }
     @endphp
     <div class="fixed bottom-24 lg:bottom-7 right-5 z-[90] flex items-center group">
         <!-- Optional Tooltip / Chat Prompt -->
