@@ -41,7 +41,7 @@ class VotingLeaderboardWidget extends BaseWidget
                     ->sortable()
                     ->badge()
                     ->color('info'),
-                Tables\Columns\TextColumn::make('edition.name')
+                Tables\Columns\TextColumn::make('edition.year')
                     ->label('Edition')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('votes_count')
@@ -87,7 +87,7 @@ class VotingLeaderboardWidget extends BaseWidget
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('edition')
-                    ->relationship('edition', 'name'),
+                    ->relationship('edition', 'year'),
                 Tables\Filters\SelectFilter::make('category')
                     ->relationship('category', 'name'),
             ])

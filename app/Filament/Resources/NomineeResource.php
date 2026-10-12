@@ -91,7 +91,7 @@ class NomineeResource extends Resource
                     ->label('Category')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('edition.name')
+                Tables\Columns\TextColumn::make('edition.year')
                     ->label('Edition')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('votes_count')
@@ -133,7 +133,7 @@ class NomineeResource extends Resource
             ->defaultSort('votes_count', 'desc')
             ->filters([
                 Tables\Filters\SelectFilter::make('edition')
-                    ->relationship('edition', 'name'),
+                    ->relationship('edition', 'year'),
                 Tables\Filters\SelectFilter::make('category')
                     ->relationship('category', 'name'),
                 Tables\Filters\SelectFilter::make('status')
