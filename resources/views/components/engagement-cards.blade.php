@@ -11,8 +11,8 @@
     
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <h2 class="text-4xl md:text-6xl font-extrabold text-nissa-dark mb-16 max-w-4xl leading-tight">
-            From Recognition to Runways.<br>
-            <span class="text-nissa-magenta">Engage, Elevate, Empower</span>
+            Your Courage Deserves Recognition.<br>
+            <span class="text-nissa-magenta">Your Success Deserves the Spotlight.</span>
         </h2>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

@@ -314,6 +314,38 @@
     </div>
     @endif
 
+    <!-- Floating WhatsApp Chat Widget -->
+    @php
+        $whatsappNumber = '923307951212';
+        if (!empty($settings['phone'])) {
+            $cleanedPhone = preg_replace('/[^0-9]/', '', $settings['phone']);
+            if (strlen($cleanedPhone) >= 10) {
+                $whatsappNumber = $cleanedPhone;
+            }
+        }
+    @endphp
+    <div class="fixed bottom-24 lg:bottom-7 right-5 z-[90] flex items-center group">
+        <!-- Optional Tooltip / Chat Prompt -->
+        <a href="https://wa.me/{{ $whatsappNumber }}?text={{ urlencode('Hello! I would like to get more information about Nissa Awards.') }}"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="mr-3 hidden md:flex items-center bg-white text-gray-800 text-xs font-semibold px-3 py-2 rounded-full shadow-lg border border-gray-100 opacity-90 hover:opacity-100 transition-all duration-300 transform group-hover:scale-105">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping mr-2"></span>
+            Chat with us
+        </a>
+
+        <!-- WhatsApp Icon Button -->
+        <a href="https://wa.me/{{ $whatsappNumber }}?text={{ urlencode('Hello! I would like to get more information about Nissa Awards.') }}"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Chat on WhatsApp"
+           class="relative w-14 h-14 bg-[#25D366] hover:bg-[#20ba59] text-white rounded-full flex items-center justify-center shadow-2xl hover:shadow-emerald-500/50 transition-all duration-300 transform hover:scale-110 active:scale-95">
+            <!-- Ripple/Pulse effect -->
+            <span class="absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-30 animate-ping"></span>
+            <i class="fa-brands fa-whatsapp text-3xl relative z-10"></i>
+        </a>
+    </div>
+
     <!-- Mobile Bottom Navigation (App-like) -->
     <div class="lg:hidden fixed bottom-0 left-0 w-full bg-nissa-dark border-t border-gray-800 z-[100] pb-4 pt-3 px-4 flex justify-between items-center text-xs text-gray-400 shadow-[0_-4px_10px_-1px_rgba(0,0,0,0.3)] rounded-t-3xl">
         <a href="{{ route('home') }}" class="flex flex-col items-center justify-center w-1/5 hover:text-nissa-pink {{ request()->routeIs('home') ? 'text-nissa-magenta' : '' }} transition">
