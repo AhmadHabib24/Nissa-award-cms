@@ -20,8 +20,9 @@ Route::get('/', function () {
     $pastWinners = \App\Models\PastWinner::where('is_active', true)->latest()->take(8)->get();
     $partners = \App\Models\Partner::where('is_active', true)->orderBy('sort_order')->get();
     $galleryImages = \App\Models\GalleryImage::where('is_active', true)->orderBy('sort_order')->get();
+    $videoGalleries = \App\Models\VideoGallery::where('is_active', true)->orderBy('sort_order')->get();
     
-    return view('welcome', compact('categories', 'featuredNominees', 'teamMembers', 'pastWinners', 'partners', 'galleryImages'));
+    return view('welcome', compact('categories', 'featuredNominees', 'teamMembers', 'pastWinners', 'partners', 'galleryImages', 'videoGalleries'));
 })->name('home');
 
 Route::get('/about', function () {

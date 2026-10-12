@@ -21,11 +21,17 @@
                 <div class="w-full aspect-[4/5] bg-nissa-dark" style="clip-path: polygon(0% 0%, 85% 0%, 100% 50%, 85% 100%, 0% 100%);">
                     <!-- The actual image inside with a slight margin to create a border effect -->
                     <div class="absolute inset-2 bg-gray-200" style="clip-path: polygon(0% 0%, 84% 0%, 99% 50%, 84% 100%, 0% 100%);">
-                        <img src="https://images.unsplash.com/photo-1541845157-a6d2d100c931?auto=format&fit=crop&q=80&w=800" alt="Nissa Awards Event" class="w-full h-full object-cover">
+                        @php
+                            $editionImage = (isset($currentEdition) && $currentEdition->image) 
+                                ? Storage::url($currentEdition->image) 
+                                : 'https://images.unsplash.com/photo-1541845157-a6d2d100c931?auto=format&fit=crop&q=80&w=800';
+                            $editionYear = isset($currentEdition) && $currentEdition->year ? $currentEdition->year : '2026';
+                        @endphp
+                        <img src="{{ $editionImage }}" alt="Nissa Awards Event" class="w-full h-full object-cover">
                         <!-- Dark overlay at the bottom for dramatic effect -->
                         <div class="absolute bottom-0 w-full h-1/3 bg-gradient-to-t from-nissa-dark to-transparent opacity-80"></div>
                         <div class="absolute bottom-8 left-8 border border-nissa-magenta p-4 backdrop-blur-sm bg-black/40">
-                            <h3 class="text-white font-bold text-2xl uppercase leading-tight">Nissa<br>Awards<br><span class="text-nissa-pink">2026</span></h3>
+                            <h3 class="text-white font-bold text-2xl uppercase leading-tight">Nissa<br>Awards<br><span class="text-nissa-pink">{{ $editionYear }}</span></h3>
                         </div>
                     </div>
                 </div>

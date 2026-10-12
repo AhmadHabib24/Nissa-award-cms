@@ -18,6 +18,8 @@
 
 <x-hall-of-fame :pastWinners="$pastWinners" />
 
+<x-video-gallery :videos="$videoGalleries" />
+
 <x-event-partners :partners="$partners" />
 
 @endsection

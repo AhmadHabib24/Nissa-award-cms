@@ -30,11 +30,22 @@ class EditionResource extends Resource
                     ->label('Edition Description (Theory Content)')
                     ->rows(4)
                     ->columnSpanFull(),
+                Forms\Components\FileUpload::make('image')
+                    ->label('Event Breakdown / Edition Image')
+                    ->image()
+                    ->directory('editions')
+                    ->columnSpanFull(),
                 Forms\Components\DatePicker::make('date'),
                 Forms\Components\TextInput::make('venue')
                     ->maxLength(255)
                     ->default(null),
-                Forms\Components\TextInput::make('status')
+                Forms\Components\Select::make('status')
+                    ->options([
+                        'upcoming' => 'Upcoming',
+                        'active' => 'Active',
+                        'completed' => 'Completed',
+                    ])
+                    ->default('upcoming')
                     ->required(),
                 Forms\Components\Toggle::make('is_active')
                     ->required(),
@@ -45,6 +56,8 @@ class EditionResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\ImageColumn::make('image')
+                    ->label('Image'),
                 Tables\Columns\TextColumn::make('year')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('date')
@@ -52,7 +65,13 @@ class EditionResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('venue')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('status'),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->colors([
+                        'warning' => 'upcoming',
+                        'success' => 'active',
+                        'info' => 'completed',
+                    ]),
                 Tables\Columns\IconColumn::make('is_active')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
